@@ -1,25 +1,28 @@
 version: '3'
 services:
   db:
-    image: mysql:8
+    container_name: database
+    image: mysql:latest
     ports:
-      - "3306:3306"
+      - "3302:3306"
     environment:
-      - MYSQL_DATABASE='test'
-      - MYSQL_USER='root'
-      - MYSQL_PASSWORD='root'
-      - MYSQL_ROOT_PASSWORD='root'
-      - MYSQL_HOST=''
-    volumes:
-      - /tmp/app/mysqld:/var/run/mysqld
-      - ./db:/var/lib/mysql
+      - MYSQL_DATABASE=test
+      - MYSQL_ROOT_PASSWORD=root
+    restart: always
   web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    container_name: app
+    restart: always
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "
+              python3 manage.py makemigrations
+              && python3 manage.py migrate
+              && python3 manage.py runserver 0.0.0.0:8000
+              "
     ports:
       - "8000:8000"
     volumes:
       - .:/app
-      - /tmp/app/mysqld:/run/mysqld
     depends_on:
       - db
