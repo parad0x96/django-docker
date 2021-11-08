@@ -1,4 +1,4 @@
-# django-mysql-docker
+# django-mysql-docker with translations
 Run:
 
 sudo docker-compose up --build
