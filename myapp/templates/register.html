@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 
@@ -24,7 +25,7 @@
 </style>
 
 <body class="center">
-    <h1>Registration</h1>
+    <h1>{% trans "Registration" %}</h1>
     <form method="POST">
         {% csrf_token %}
         {% for field in form %}

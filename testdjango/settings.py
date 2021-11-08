@@ -15,6 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+print(BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -126,6 +128,25 @@ LOGIN_REDIRECT_URL ='/'
 
 STATIC_URL = '/static/'
 
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGE_CODE = 'fr'
+
+USE_I18N = True
+'''
+LANGUAGES = [
+    ('en', _('English')),
+    ('fr', _('French')),
+]'''
+'''LOCALE_PATHS = (
+    os.path.join(BASE_DIR,'locale'),
+)'''
+USE_L10N = True
+
+USE_TZ = True
+LOCALE_PATHS = (
+    'myapp/locale',
+)
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
